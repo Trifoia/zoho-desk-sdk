@@ -1,28 +1,30 @@
-'use strict';
+"use strict"
 
-const refreshTokenGen = require('./lib/helpers/refresh-token-gen.js');
+const refreshTokenGen = require("./lib/helpers/refresh-token-gen.js")
 
-const Request = require('./lib/request/request.js');
-const scopes = require('./lib/data/scopes.js');
+const Request = require("./lib/request/request.js")
+const scopes = require("./lib/data/scopes.js")
 
 // Endpoints
-const organizations = require('./lib/endpoints/organizations.js');
-const contacts = require('./lib/endpoints/contacts.js');
-const views = require('./lib/endpoints/views.js');
+const organizations = require("./lib/endpoints/organizations.js")
+const contacts = require("./lib/endpoints/contacts.js")
+const departments = require("./lib/endpoints/departments.js")
+const views = require("./lib/endpoints/views.js")
+const tickets = require("./lib/endpoints/tickets.js")
 
 class ZohoDeskSDK {
   /**
    * Scopes available when generating access tokens
    */
   static get scopes() {
-    return scopes;
+    return scopes
   }
 
   /**
    * Static level access to the refresh token generation helper
    */
   static get refreshTokenGen() {
-    return refreshTokenGen;
+    return refreshTokenGen
   }
 
   /**
@@ -35,7 +37,7 @@ class ZohoDeskSDK {
      * @private
      * Internal request object used to make requests
      */
-    this._request = new Request(opts);
+    this._request = new Request(opts)
 
     /**
      * Starting point for API access
@@ -54,8 +56,18 @@ class ZohoDeskSDK {
       /**
        * Access to view data
        */
-      views: views(this._request)
-    };
+      views: views(this._request),
+
+      /**
+       * Access to department data
+       */
+      departments: departments(this._request),
+
+      /**
+       * Access to ticket data
+       */
+      tickets: tickets(this._request)
+    }
   }
 
   /**
@@ -64,8 +76,8 @@ class ZohoDeskSDK {
    * @param {number} id The default org id
    */
   setOrgId(id) {
-    this._request.options.orgId = id;
+    this._request.options.orgId = id
   }
 }
 
-module.exports = ZohoDeskSDK;
+module.exports = ZohoDeskSDK
