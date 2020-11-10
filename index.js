@@ -8,7 +8,9 @@ const scopes = require('./lib/data/scopes.js');
 // Endpoints
 const organizations = require('./lib/endpoints/organizations.js');
 const contacts = require('./lib/endpoints/contacts.js');
+const departments = require('./lib/endpoints/departments.js');
 const views = require('./lib/endpoints/views.js');
+const tickets = require('./lib/endpoints/tickets.js');
 
 class ZohoDeskSDK {
   /**
@@ -54,7 +56,17 @@ class ZohoDeskSDK {
       /**
        * Access to view data
        */
-      views: views(this._request)
+      views: views(this._request),
+
+      /**
+       * Access to department data
+       */
+      departments: departments(this._request),
+
+      /**
+       * Access to ticket data
+       */
+      tickets: tickets(this._request)
     };
   }
 
